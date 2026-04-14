@@ -3,8 +3,6 @@ package br.edu.utfpr.pb.pw44s.server.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -22,20 +20,30 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
-    @Size(min = 4, max = 50)
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     private String username;
 
     @NotNull
-    @Size(min = 4, max = 50)
     @Column(length = 50, name = "display_name")
     private String displayName;
 
     @NotNull
     private String password;
+
+    // --- NOVOS CAMPOS ---
+    @NotNull
+    @Column(length = 100, unique = true)
+    private String email;
+
+    @NotNull
+    @Column(length = 14, unique = true)
+    private String cpf;
+
+    @Column(length = 20)
+    private String phone;
 
     @Override
     @Transient
@@ -71,5 +79,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
