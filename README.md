@@ -1,6 +1,7 @@
 # NEXUS - E-commerce Gamer (Projeto PW44S - Turma 4SI)
 
 **Desenvolvedor:** Matheus C. P. Santos e Isacar Freitas
+
 **Instituição:** UTFPR - Câmpus Pato Branco
 
 ---
