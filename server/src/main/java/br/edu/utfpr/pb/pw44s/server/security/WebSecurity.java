@@ -59,20 +59,18 @@ public class WebSecurity {
         //define o objeto responsável pelo tratamento de exceção ao entrar com credenciais inválidas
         http.exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(authenticationEntryPoint));
 
-        // configura a authorização das requisições
         http.authorizeHttpRequests((authorize) -> authorize
-                //permite que a rota "/users" seja acessada, mesmo sem o usuário estar autenticado desde que o método HTTP da requisição seja POST
                 .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
-                //permite que a rota "/error" seja acessada por qualquer    requisição mesmo o usuário não estando autenticado
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers("/error/**").permitAll()
-                //permite que a rota "/h2-console" seja acessada por qualquer requisição mesmo o usuário não estando autenticado
                 .requestMatchers("/h2-console/**").permitAll()
-
-                .requestMatchers("/products/**").permitAll()
-                .requestMatchers("/categories/**").permitAll()
-                //as demais rotas da aplicação só podem ser acessadas se o usuário estiver autenticado
+                .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/images/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/freights/calculate").permitAll()
                 .anyRequest().authenticated()
         );
+
         http.authenticationManager(authenticationManager)
                 //Filtro da Autenticação - sobrescreve o método padrão do Spring Security para Autenticação.
                 .addFilter(new JWTAuthenticationFilter(authenticationManager, authService))
@@ -103,7 +101,7 @@ public class WebSecurity {
         // Lista dos métodos HTTP autorizados
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT"));
         // Lista dos Headers autorizados, o Authorization será o header que iremos utilizar para transferir o Token
-        configuration.setAllowedHeaders(List.of("Authorization","x-xsrf-token",
+        configuration.setAllowedHeaders(List.of("Authorization", "x-xsrf-token",
                 "Access-Control-Allow-Headers", "Origin",
                 "Accept", "X-Requested-With", "Content-Type",
                 "Access-Control-Request-Method",

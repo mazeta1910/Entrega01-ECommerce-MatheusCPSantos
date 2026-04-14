@@ -21,3 +21,8 @@ INSERT INTO tb_user(display_name, username, password, email, cpf, phone) VALUES 
 INSERT INTO tb_coupon(code, discount_value, validity, is_active, first_purchase_only) VALUES ('BEMVINDO15', 15.00, '2026-12-31', true, true);
 INSERT INTO tb_coupon(code, discount_value, validity, is_active, first_purchase_only) VALUES ('NEXUS10', 10.00, '2026-12-31', true, false);
 INSERT INTO tb_coupon(code, discount_value, validity, is_active, first_purchase_only) VALUES ('BLACKFRIDAY50', 50.00, '2025-11-28', false, false);
+
+-- Transportadoras para cálculo de frete
+INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALUES ('Correios PAC', 15.00, 5, true);
+INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALUES ('Correios SEDEX', 35.00, 2, true);
+INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALUES ('Jadlog Transportes', 22.00, 4, true);

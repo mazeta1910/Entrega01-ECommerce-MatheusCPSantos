@@ -1,6 +1,11 @@
 # NEXUS - E-commerce Gamer (Projeto PW44S - Turma 4SI)
 
-O objetivo da disciplina é desenvolver aplicações Cliente-Servidor Web com acesso à Banco de Dados. Dominar os conceitos básicos da programação Cliente-Servidor para Internet e saber utilizá-los adequadamente no desenvolvimento de aplicativos dessa natureza.
+**Desenvolvedor:** Matheus C. P. Santos e Isacar Freitas
+**Instituição:** UTFPR - Câmpus Pato Branco
+
+---
+
+O objetivo da disciplina é desenvolver aplicações Cliente-Servidor Web com acesso a Banco de Dados. Dominar os conceitos básicos da programação Cliente-Servidor para Internet e saber utilizá-los adequadamente no desenvolvimento de aplicativos dessa natureza.
 
 Para esta avaliação, foi desenvolvida a plataforma **NEXUS**, uma aplicação web de comércio eletrônico focada no público gamer (jogos, consoles e acessórios). A solução web é composta por dois projetos: uma API RESTful (*back-end*), localizada na pasta **server**, e um cliente web (*front-end*), localizado na pasta **client** deste repositório.
 
@@ -8,9 +13,9 @@ Para esta avaliação, foi desenvolvida a plataforma **NEXUS**, uma aplicação 
 
 ## API RESTful (*Back-end*)
 
-A API REST foi desenvolvida utilizando o *framework* **Spring Boot** com a linguagem de programação Java, abordando segurança com JWT, validações e persistência de dados.
+A API REST foi desenvolvida utilizando o *framework* **Spring Boot** com a linguagem de programação Java, abordando segurança com JWT, validações estritas de negócio e persistência de dados.
 
-### ⚙️ Lista de Ferramentas
+### Lista de Ferramentas
 
 - <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" width="20" /> JDK 17 / 24
 - IDE:
@@ -30,7 +35,7 @@ A API REST foi desenvolvida utilizando o *framework* **Spring Boot** com a lingu
 
 O Cliente web foi desenvolvido utilizando a biblioteca **React** com a linguagem de programação Typescript e a ferramenta de build Vite.
 
-### ⚙️ Lista de Ferramentas
+### Lista de Ferramentas
 
 - IDE:
     - <img width="20" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/visual_studio_code.png" alt="Visual Studio Code" title="Visual Studio Code"/> Visual Studio Code
@@ -42,22 +47,23 @@ O Cliente web foi desenvolvido utilizando a biblioteca **React** com a linguagem
 
 ---
 
-## 📋 Escopo e Funcionalidades (NEXUS)
+## Escopo e Funcionalidades (NEXUS)
 
 ### Área Pública
 - [x] **Catálogo de Produtos:** Listagem geral de produtos.
 - [x] **Detalhes do Produto:** Visualização individual por ID.
 - [x] **Lista de Categorias:** Listagem de categorias para filtro.
+- [x] **Simulação de Frete:** Cálculo dinâmico de prazos e valores de entrega via rota pública, baseado na região do CEP do usuário.
 - [ ] **Carrinho de Compras:** Adição, remoção e edição de quantidades (disponível para usuários não autenticados).
 
 ### Área do Cliente (Requer Autenticação)
-- [x] **Cadastro de Usuário:** Criação de perfil com validação de credenciais.
+- [x] **Cadastro de Usuário:** Criação de perfil com validação avançada de credenciais e dados.
 - [x] **Autenticação:** Sistema seguro de login com emissão de token JWT.
-- [ ] **Gestão de Endereços:** Suporte a múltiplos endereços de entrega por usuário.
-- [ ] **Checkout:** Cadastro de Pedidos e processamento de compras.
-- [ ] **Histórico de Compras:** Consulta de lista de pedidos realizados pelo usuário.
+- [x] **Gestão de Endereços:** Suporte a múltiplos endereços de entrega validados por usuário.
+- [x] **Sistema de Cupons:** Aplicação inteligente de descontos com regras de negócio ativas (ex: exclusividade para primeira compra).
+- [ ] **Checkout:** Fechamento de pedidos integrando soma de produtos, aplicação de cupom e taxas de transportadora.
+- [ ] **Histórico de Compras:** Consulta de lista de pedidos realizados e rastreio de *status* da encomenda.
 
----
-
-👨‍💻 **Desenvolvedor:** Matheus C. P. Santos  
-📍 **Instituição:** UTFPR - Câmpus Pato Branco
+### Área Administrativa (Back-office)
+- [x] **Gestão de Transportadoras:** Painel logístico simulado para adicionar transportadoras locais/nacionais, ajustar taxas bases e prazos (Mock).
+- [x] **Controle de Campanhas:** Gerenciamento ativo/inativo e definição de validade dos cupons promocionais da loja.
