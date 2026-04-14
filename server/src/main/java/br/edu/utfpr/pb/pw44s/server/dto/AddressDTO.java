@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddressDTO {
 
+    @NotNull(message = "O ID do usuário é obrigatório.")
     private Long id;
 
     @NotNull

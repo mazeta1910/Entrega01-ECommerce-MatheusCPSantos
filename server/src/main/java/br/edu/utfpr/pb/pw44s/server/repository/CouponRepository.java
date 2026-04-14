@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
-
-    Optional<Coupon> findByCode(String code);
+    // Busca um cupom ativo pelo código (usado no checkout)
+    Optional<Coupon> findByCodeAndActiveTrue(String code);
 }

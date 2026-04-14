@@ -22,6 +22,16 @@ public class CouponServiceImpl extends CrudServiceImpl<Coupon, Long> implements 
 
     @Override
     public Coupon findByCode(String code) {
-        return couponRepository.findByCode(code).orElse(null);
+        return couponRepository.findByCodeAndActiveTrue(code).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        Coupon coupon = couponRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cupom não encontrado"));
+
+        coupon.setActive(false); // Soft Delete
+
+        couponRepository.save(coupon);
     }
 }

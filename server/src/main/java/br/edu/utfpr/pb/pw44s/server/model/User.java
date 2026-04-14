@@ -34,6 +34,7 @@ public class User implements UserDetails {
     private String password;
 
     // --- NOVOS CAMPOS ---
+
     @NotNull
     @Column(length = 100, unique = true)
     private String email;
@@ -42,8 +43,11 @@ public class User implements UserDetails {
     @Column(length = 14, unique = true)
     private String cpf;
 
+    @NotNull // ADICIONAR VALIDAÇÃO
     @Column(length = 20)
     private String phone;
+
+    // @NotNull DATA DE NASCIMENTO
 
     @Override
     @Transient

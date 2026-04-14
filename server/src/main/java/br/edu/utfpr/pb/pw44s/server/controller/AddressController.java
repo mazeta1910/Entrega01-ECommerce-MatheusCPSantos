@@ -5,8 +5,15 @@ import br.edu.utfpr.pb.pw44s.server.mapper.AddressMapper;
 import br.edu.utfpr.pb.pw44s.server.model.Address;
 import br.edu.utfpr.pb.pw44s.server.service.IAddressService;
 import br.edu.utfpr.pb.pw44s.server.service.ICrudService;
+import br.edu.utfpr.pb.pw44s.server.service.impl.AddressServiceImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("addresses")
@@ -33,5 +40,20 @@ public class AddressController extends CrudController<Address, AddressDTO, Long>
     @Override
     protected Address toEntity(AddressDTO dto) {
         return addressMapper.toEntity(dto);
+    }
+
+    /**
+     * Retorna apenas os endereços ativos de um usuário específico.
+     * Essencial para a privacidade dos dados no NEXUS.
+     */
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<AddressDTO>> getUserAddresses(@PathVariable Long userId) {
+        List<Address> addresses = ((AddressServiceImpl) addressService).findActiveByUserId(userId);
+
+        List<AddressDTO> dtos = addresses.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 }

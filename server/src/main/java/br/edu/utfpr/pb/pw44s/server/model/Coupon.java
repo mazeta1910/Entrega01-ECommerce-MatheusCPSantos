@@ -1,5 +1,7 @@
 package br.edu.utfpr.pb.pw44s.server.model;
 
+import br.edu.utfpr.pb.pw44s.server.model.enums.DiscountType;
+import br.edu.utfpr.pb.pw44s.server.model.enums.TargetType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -29,11 +31,32 @@ public class Coupon {
     private BigDecimal discountValue;
 
     @NotNull
-    private LocalDate validity;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "discount_type")
+    private DiscountType type; // FIXED ou PERCENTAGE
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @NotNull
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @NotNull
+    @Column(name = "end_date")
+    private LocalDate endDate; // Substitui o antigo 'validity' para o agendamento
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "target_type")
+    private TargetType targetType; // ALL, CATEGORY, PRODUCT
+
+    @Column(name = "target_id")
+    private Long targetId; // ID da categoria ou produto alvo
+
+    @Column(name = "min_purchase_value", precision = 10, scale = 2)
+    private BigDecimal minPurchaseValue;
+
+    @Column(name = "active")
+    private Boolean active = true;
 
     @Column(name = "first_purchase_only")
-    private Boolean firstPurchaseOnly;
+    private Boolean firstPurchaseOnly = false;
 }

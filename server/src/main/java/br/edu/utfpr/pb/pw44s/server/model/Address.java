@@ -47,7 +47,10 @@ public class Address {
     @Column(length = 2)
     private String state;
 
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

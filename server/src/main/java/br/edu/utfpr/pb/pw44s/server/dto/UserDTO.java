@@ -29,7 +29,7 @@ public class UserDTO {
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres.")
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#]).*$",
-            message = "A senha deve conter pelo menos uma letra maiúscula, uma minúscula    , um número e um caractere especial."
+            message = "A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial."
     )
     private String password;
 
