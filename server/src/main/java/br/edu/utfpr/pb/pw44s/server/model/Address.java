@@ -16,7 +16,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Size(min = 8, max = 9, message = "O CEP deve ter 8 ou 9 caracteres.")
