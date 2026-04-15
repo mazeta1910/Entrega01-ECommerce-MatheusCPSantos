@@ -17,12 +17,17 @@ insert into tb_product (name, description, price, category_id) values ('Roteador
 INSERT INTO tb_user(display_name, username, password, email, cpf, phone) VALUES ('Administrador', 'admin','$2a$10$.PVIfB07x.SfMYTcToxL0.yxcLWU0GbS2NUO1W1QAvqMm/TsFhVem', 'admin@nexus.com.br', '000.000.000-00', '(46) 99999-9999');
 INSERT INTO tb_user(display_name, username, password, email, cpf, phone) VALUES ('Teste', 'test','$2a$10$.PVIfB07x.SfMYTcToxL0.yxcLWU0GbS2NUO1W1QAvqMm/TsFhVem', 'teste@nexus.com.br', '111.111.111-11', '(46) 98888-8888');
 
--- Cupons de Desconto
-INSERT INTO tb_coupon(code, discount_value, validity, is_active, first_purchase_only) VALUES ('BEMVINDO15', 15.00, '2026-12-31', true, true);
-INSERT INTO tb_coupon(code, discount_value, validity, is_active, first_purchase_only) VALUES ('NEXUS10', 10.00, '2026-12-31', true, false);
-INSERT INTO tb_coupon(code, discount_value, validity, is_active, first_purchase_only) VALUES ('BLACKFRIDAY50', 50.00, '2025-11-28', false, false);
+-- ==========================================
+-- POPULANDO A TABELA DE CUPONS (tb_coupon)
+-- ==========================================
+INSERT INTO tb_coupon (code, discount_value, discount_type, start_date, end_date, target_type, target_id, min_purchase_value, active, first_purchase_only) VALUES ('NEXUS10', 10.00, 'PERCENTAGE', '2026-01-01', '2026-12-31', 'ALL', NULL, 100.00, TRUE, FALSE);
+INSERT INTO tb_coupon (code, discount_value, discount_type, start_date, end_date, target_type, target_id, min_purchase_value, active, first_purchase_only) VALUES ('BEMVINDO20', 20.00, 'PERCENTAGE', '2026-01-01', '2026-12-31', 'ALL', NULL, NULL, TRUE, TRUE);
+INSERT INTO tb_coupon (code, discount_value, discount_type, start_date, end_date, target_type, target_id, min_purchase_value, active, first_purchase_only) VALUES ('GAMES50', 50.00, 'FIXED', '2026-04-01', '2026-12-31', 'CATEGORY', 1, 200.00, TRUE, FALSE);
+INSERT INTO tb_coupon (code, discount_value, discount_type, start_date, end_date, target_type, target_id, min_purchase_value, active, first_purchase_only) VALUES ('PROMO30', 30.00, 'FIXED', '2026-04-01', '2026-12-31', 'PRODUCT', 1, NULL, TRUE, FALSE);
 
--- Transportadoras para cálculo de frete
+-- ==========================================
+-- POPULANDO A TABELA DE TRANSPORTADORAS (tb_carrier)
+-- ==========================================
 INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALUES ('Correios PAC', 15.00, 5, true);
 INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALUES ('Correios SEDEX', 35.00, 2, true);
 INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALUES ('Jadlog Transportes', 22.00, 4, true);

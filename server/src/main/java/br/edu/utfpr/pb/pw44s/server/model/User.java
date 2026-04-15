@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.pw44s.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,7 +44,8 @@ public class User implements UserDetails {
     @Column(length = 14, unique = true)
     private String cpf;
 
-    @NotNull // ADICIONAR VALIDAÇÃO
+    @NotNull
+    @NotBlank(message = "O telefone é obrigatório.")
     @Column(length = 20)
     private String phone;
 

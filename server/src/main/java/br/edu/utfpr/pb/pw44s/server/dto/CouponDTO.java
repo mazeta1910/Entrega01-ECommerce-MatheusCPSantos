@@ -34,4 +34,6 @@ public class CouponDTO {
     private BigDecimal minPurchaseValue;
     private Boolean active;
     private Boolean firstPurchaseOnly;
+    private String discountTypeDescription;
+    private String targetTypeDescription;
 }

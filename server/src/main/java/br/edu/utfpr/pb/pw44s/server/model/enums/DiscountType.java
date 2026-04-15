@@ -1,6 +1,15 @@
 package br.edu.utfpr.pb.pw44s.server.model.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum DiscountType {
-    FIXED,      // R$ 10,00 de desconto
-    PERCENTAGE  // 10% de desconto
+    FIXED("Valor Fixo"),
+    PERCENTAGE("Percentual");
+
+    private final String description;
+
+    DiscountType(String description) {
+        this.description = description;
+    }
 }

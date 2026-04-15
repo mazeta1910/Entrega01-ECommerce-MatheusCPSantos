@@ -1,9 +1,7 @@
 package br.edu.utfpr.pb.pw44s.server.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +31,18 @@ public class UserDTO {
     )
     private String password;
 
+    @NotBlank(message = "A confirmação de senha é obrigatória.")
+    private String confirmPassword;
+
+    @JsonIgnore
+    @AssertTrue(message = "As senhas informadas não coincidem.")
+    public boolean isPasswordsMatch() {
+        if (password == null || confirmPassword == null) {
+            return true;
+        }
+        return password.equals(confirmPassword);
+    }
+
     // --- NOVOS CAMPOS NEXUS ---
 
     @NotNull(message = "O e-mail é obrigatório.")
@@ -43,6 +53,10 @@ public class UserDTO {
     @Size(min = 11, max = 14, message = "O CPF deve conter entre 11 e 14 caracteres.")
     private String cpf;
 
-    @Size(max = 20)
+    @NotBlank(message = "O telefone é obrigatório.")
+    @Pattern(regexp = "^[0-9]{10,11}$",
+            message = "O telefone deve conter apenas números, com DDD (10 ou 11 dígitos).")
     private String phone;
+
+
 }
