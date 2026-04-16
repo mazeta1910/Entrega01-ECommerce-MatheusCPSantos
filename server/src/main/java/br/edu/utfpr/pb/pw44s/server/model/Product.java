@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +33,18 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+    @Column(name = "is_adult_only")
+    private Boolean adultOnly = false;
+
+    // Lógica de conferência no Checkout ou Carrinho
+    public void validatePurchase(User user, Product product) {
+        int userAge = java.time.Period.between(user.getBirthDate(), LocalDate.now()).getYears();
+
+        if (product.getAdultOnly() && userAge < 18) {
+            throw new RuntimeException("Este produto é restrito para maiores de 18 anos.");
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

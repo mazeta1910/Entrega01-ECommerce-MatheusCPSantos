@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
@@ -16,7 +17,8 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter @Setter
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -37,6 +39,14 @@ public class User implements UserDetails {
     // --- NOVOS CAMPOS ---
 
     @NotNull
+    @Column(name = "full_name", length = 150)
+    private String fullName;
+
+    @NotNull
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
+    @NotNull
     @Column(length = 100, unique = true)
     private String email;
 
@@ -49,7 +59,13 @@ public class User implements UserDetails {
     @Column(length = 20)
     private String phone;
 
-    // @NotNull DATA DE NASCIMENTO
+    @Column(name = "newsletter_subscription")
+    private Boolean newsletterSubscription = false;
+
+    @Column(name = "parent_id")
+    private Long parentId; // ID do usuário (pai/mãe) que supervisiona esta conta
+
+    // DEMAIS CAMPOS //
 
     @Override
     @Transient
@@ -85,4 +101,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

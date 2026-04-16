@@ -23,4 +23,6 @@ public class ProductDTO {
     private BigDecimal price;
 
     private CategoryDTO category;
+
+    private Boolean adultOnly = false;
 }
