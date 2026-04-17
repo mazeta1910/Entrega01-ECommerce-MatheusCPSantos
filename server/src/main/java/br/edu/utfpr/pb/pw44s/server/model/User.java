@@ -63,7 +63,11 @@ public class User implements UserDetails {
     private Boolean newsletterSubscription = false;
 
     @Column(name = "parent_id")
-    private Long parentId; // ID do usuário (pai/mãe) que supervisiona esta conta
+    private Long parentId;
+
+    @NotNull
+    @Column(name = "terms_accepted")
+    private Boolean termsAccepted = false;
 
     // DEMAIS CAMPOS //
 

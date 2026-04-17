@@ -72,6 +72,10 @@ public class UserDTO {
 
     private Long parentId;
 
+    @NotNull(message = "O aceite dos termos é obrigatório.")
+    @AssertTrue(message = "Você deve aceitar os termos de uso para prosseguir com o cadastro.")
+    private Boolean termsAccepted;
+
      /**
      * Validação do ECA Digital (2026):
      */
