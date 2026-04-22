@@ -22,6 +22,9 @@ public class ProductDTO {
     @NotNull
     private BigDecimal price;
 
+    @NotNull
+    private String image;
+
     private CategoryDTO category;
 
     private Boolean adultOnly = false;

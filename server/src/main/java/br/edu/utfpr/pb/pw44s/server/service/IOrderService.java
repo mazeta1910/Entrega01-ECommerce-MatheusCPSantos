@@ -1,9 +1,16 @@
 package br.edu.utfpr.pb.pw44s.server.service;
 
-import br.edu.utfpr.pb.pw44s.server.model.Product;
-import br.edu.utfpr.pb.pw44s.server.model.User;
+import br.edu.utfpr.pb.pw44s.server.model.Order;
+
+import java.util.List;
 
 public interface IOrderService {
-    void validatePurchase(User user, Product product);
-    // futuramente terá métodos como: void checkout(Cart cart);
+
+    List<Order> findAll();
+
+    Order findById(Long id);
+
+    Order save(Order order);
+
+    void delete(Long id);
 }

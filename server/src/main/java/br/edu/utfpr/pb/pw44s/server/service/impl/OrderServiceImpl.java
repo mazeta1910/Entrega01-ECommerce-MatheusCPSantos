@@ -1,20 +1,37 @@
-package br.edu.utfpr.pb.pw44s.server.service.impl;
+package br.edu.utfpr.pb.pw44s.server.service;
 
-import br.edu.utfpr.pb.pw44s.server.model.Product;
-import br.edu.utfpr.pb.pw44s.server.model.User;
-import br.edu.utfpr.pb.pw44s.server.service.IOrderService;
+import br.edu.utfpr.pb.pw44s.server.model.Order;
+import br.edu.utfpr.pb.pw44s.server.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
+
+import java.util.List;
 
 @Service
-public class OrderServiceImpl implements IOrderService {
+public class OrderService implements IOrderService {
+
+    @Autowired
+    private OrderRepository repository;
 
     @Override
-    public void validatePurchase(User user, Product product) {
-        int userAge = java.time.Period.between(user.getBirthDate(), LocalDate.now()).getYears();
+    public List<Order> findAll() {
+        return repository.findAll();
+    }
 
-        if (product.getAdultOnly() != null && product.getAdultOnly() && userAge < 18) {
-            throw new RuntimeException("Acesso negado: Este produto é restrito para maiores de 18 anos, conforme ECA Digital.");
-        }
+    @Override
+    public Order findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+    }
+
+    @Override
+    public Order save(Order order) {
+        order.calculateTotal(); // 🔥 importante
+        return repository.save(order);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
