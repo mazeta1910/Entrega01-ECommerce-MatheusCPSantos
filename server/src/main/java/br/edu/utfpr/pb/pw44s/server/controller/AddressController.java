@@ -46,14 +46,13 @@ public class AddressController extends CrudController<Address, AddressDTO, Long>
      * Retorna apenas os endereços ativos de um usuário específico.
      * Essencial para a privacidade dos dados no NEXUS.
      */
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<AddressDTO>> getUserAddresses(@PathVariable Long userId) {
-        List<Address> addresses = ((AddressServiceImpl) addressService).findActiveByUserId(userId);
+    @GetMapping("me")
+    public ResponseEntity<List<AddressDTO>> findMyAddresses() {
+        // Forma manual e segura de pegar o username do Token JWT
+        String username = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication().getName();
 
-        List<AddressDTO> dtos = addresses.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(dtos);
+        List<Address> addresses = addressService.findByUsername(username);
+        return ResponseEntity.ok(addresses.stream().map(this::toDto).collect(Collectors.toList()));
     }
 }

@@ -22,10 +22,19 @@ public class AddressServiceImpl extends CrudServiceImpl<Address, Long> implement
         return addressRepository;
     }
 
+    // --- MÉTODOS OBRIGATÓRIOS DA INTERFACE ---
+
+    @Override
+    public List<Address> findByUsername(String username) {
+        return addressRepository.findByUserUsername(username);
+    }
+
     @Override
     public List<Address> findActiveByUserId(Long userId) {
         return addressRepository.findByUserIdAndIsActiveTrue(userId);
     }
+
+    // --- SOBRESCRITA DO MÉTODO DELETE (Soft Delete) ---
 
     @Override
     public void deleteById(Long id) {

@@ -42,13 +42,13 @@ public class OrderController extends CrudController<Order, OrderDTO, Long> {
 
     //Listar pedidos apenas do usuário autenticado
     @GetMapping("me")
-    public ResponseEntity<List<OrderDTO>> findMyOrders(@AuthenticationPrincipal User user) {
-        List<Order> orders = orderService.findByUser(user);
-        return ResponseEntity.ok(
-                orders.stream()
-                        .map(this::toDto) // Usa o método que acabamos de implementar acima
-                        .collect(Collectors.toList())
-        );
+    public ResponseEntity<List<OrderDTO>> findMyOrders() {
+        // Mesma lógica para os pedidos
+        String username = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication().getName();
+
+        List<Order> orders = orderService.findByUsername(username);
+        return ResponseEntity.ok(orders.stream().map(this::toDto).collect(Collectors.toList()));
     }
 
     //Finalizar compra (vincular o pedido ao usuário do Token).

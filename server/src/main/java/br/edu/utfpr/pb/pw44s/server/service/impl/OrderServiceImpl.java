@@ -1,7 +1,6 @@
 package br.edu.utfpr.pb.pw44s.server.service.impl;
 
 import br.edu.utfpr.pb.pw44s.server.model.Order;
-import br.edu.utfpr.pb.pw44s.server.model.User;
 import br.edu.utfpr.pb.pw44s.server.repository.OrderRepository;
 import br.edu.utfpr.pb.pw44s.server.service.IOrderService;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,8 +22,9 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
         return orderRepository;
     }
 
+    // CORREÇÃO: Recebe String e chama o método correto do Repositório
     @Override
-    public List<Order> findByUser(User user) {
-        return orderRepository.findByUser(user);
+    public List<Order> findByUsername(String username) {
+        return orderRepository.findByUserUsername(username);
     }
 }
