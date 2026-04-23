@@ -9,8 +9,8 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
 
-    @Mapping(target = "id", ignore = true)
-    User toEntity(UserDTO dto);
-
+    @Mapping(target = "confirmPassword", ignore = true)
     UserDTO toDto(User entity);
+
+    User toEntity(UserDTO dto);
 }

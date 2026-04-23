@@ -41,6 +41,10 @@ public class Order {
     )
     private List<Product> products;
 
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address deliveryAddress;
+
     @PrePersist
     public void prePersist() {
         this.orderDate = LocalDateTime.now();

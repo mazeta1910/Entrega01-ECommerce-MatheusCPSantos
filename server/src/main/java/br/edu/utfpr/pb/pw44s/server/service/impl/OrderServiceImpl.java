@@ -1,37 +1,30 @@
-package br.edu.utfpr.pb.pw44s.server.service;
+package br.edu.utfpr.pb.pw44s.server.service.impl;
 
 import br.edu.utfpr.pb.pw44s.server.model.Order;
+import br.edu.utfpr.pb.pw44s.server.model.User;
 import br.edu.utfpr.pb.pw44s.server.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.edu.utfpr.pb.pw44s.server.service.IOrderService;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class OrderService implements IOrderService {
+public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IOrderService {
 
-    @Autowired
-    private OrderRepository repository;
+    private final OrderRepository orderRepository;
 
-    @Override
-    public List<Order> findAll() {
-        return repository.findAll();
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @Override
-    public Order findById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+    protected JpaRepository<Order, Long> getRepository() {
+        return orderRepository;
     }
 
     @Override
-    public Order save(Order order) {
-        order.calculateTotal(); // 🔥 importante
-        return repository.save(order);
-    }
-
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public List<Order> findByUser(User user) {
+        return orderRepository.findByUser(user);
     }
 }

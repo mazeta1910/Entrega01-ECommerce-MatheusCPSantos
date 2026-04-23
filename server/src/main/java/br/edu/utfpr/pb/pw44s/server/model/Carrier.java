@@ -30,6 +30,7 @@ public class Carrier {
     @Column(name = "estimated_delivery_days")
     private Integer estimatedDeliveryDays;
 
+    @Builder.Default
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = true;
 }

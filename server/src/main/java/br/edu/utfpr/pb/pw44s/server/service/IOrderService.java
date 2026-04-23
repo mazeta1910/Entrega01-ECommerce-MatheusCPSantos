@@ -1,16 +1,13 @@
 package br.edu.utfpr.pb.pw44s.server.service;
 
 import br.edu.utfpr.pb.pw44s.server.model.Order;
+import br.edu.utfpr.pb.pw44s.server.model.User;
 
 import java.util.List;
 
-public interface IOrderService {
+// Agora ela herda de ICrudService!
+public interface IOrderService extends ICrudService<Order, Long> {
 
-    List<Order> findAll();
+    List<Order> findByUser(User user);
 
-    Order findById(Long id);
-
-    Order save(Order order);
-
-    void delete(Long id);
 }

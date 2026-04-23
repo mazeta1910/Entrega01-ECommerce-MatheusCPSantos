@@ -59,12 +59,14 @@ public class User implements UserDetails {
     @Column(length = 20)
     private String phone;
 
+    @Builder.Default
     @Column(name = "newsletter_subscription")
     private Boolean newsletterSubscription = false;
 
     @Column(name = "parent_id")
     private Long parentId;
 
+    @Builder.Default
     @NotNull
     @Column(name = "terms_accepted")
     private Boolean termsAccepted = false;

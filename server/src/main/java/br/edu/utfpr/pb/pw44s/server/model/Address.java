@@ -47,6 +47,7 @@ public class Address {
     @Column(length = 2)
     private String state;
 
+    @Builder.Default
     @Column(name = "is_active")
     private Boolean isActive = true;
 

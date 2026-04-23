@@ -27,5 +27,6 @@ public class ProductDTO {
 
     private CategoryDTO category;
 
+    @Builder.Default
     private Boolean adultOnly = false;
 }

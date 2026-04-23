@@ -6,17 +6,17 @@ insert into tb_category (name) values ('Móveis');
 insert into tb_category (name) values ('Eletrônico');
 
 
--- ==========================================
--- POPULANDO PRODUTOS (tb_product)
--- ==========================================
-INSERT INTO tb_product (name, description, price, category_id, is_adult_only) VALUES ('Teclado Gamer Redragon', 'Teclado mecânico switch blue', 350.00, 1, FALSE);
-INSERT INTO tb_product (name, description, price, category_id, is_adult_only) VALUES ('Project Zomboid', 'Jogo de sobrevivência hardcore e violento (+18)', 100.00, 1, TRUE);
+-- Consertando os Produtos (Adicionando uma URL de imagem falsa no final)
+INSERT INTO tb_product (name, description, price, category_id, is_adult_only, image) VALUES ('Teclado Gamer Redragon', 'Teclado mecânico switch blue', 350.00, 1, FALSE, 'https://via.placeholder.com/150');
+INSERT INTO tb_product (name, description, price, category_id, is_adult_only, image) VALUES ('Project Zomboid', 'Jogo de sobrevivência hardcore e violento (+18)', 100.00, 1, TRUE, 'https://via.placeholder.com/150');
 
+-- Consertando o Usuário (Removendo o "parent_id" escrito antes do NULL)
+INSERT INTO tb_user (username, display_name, full_name, birth_date, email, cpf, phone, password, newsletter_subscription, terms_accepted, parent_id) VALUES ('admin', 'Administrador', 'Administrador do Sistema NEXUS', '1990-01-01', 'admin@nexus.com.br', '11122233344', '46999999999', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW', TRUE, TRUE, NULL);
 -- ==========================================
 -- POPULANDO USUÁRIOS (tb_user) - A senha de ambos é 'password'
 -- ==========================================
 -- Usuário 1 (ID 1): Adulto (Nascido em 1990) -> Acesso Total
-INSERT INTO tb_user (username, display_name, full_name, birth_date, email, cpf, phone, password, newsletter_subscription, terms_accepted, parent_id) VALUES ('admin', 'Administrador', 'Administrador do Sistema NEXUS', '1990-01-01', 'admin@nexus.com.br', '11122233344', '46999999999', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW', TRUE, TRUE, parent_id NULL );
+INSERT INTO tb_user (username, display_name, full_name, birth_date, email, cpf, phone, password, newsletter_subscription, terms_accepted, parent_id) VALUES ('admin', 'Administrador', 'Administrador do Sistema NEXUS', '1990-01-01', 'admin@nexus.com.br', '11122233344', '46999999999', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW', TRUE, TRUE, NULL );
 
 -- Usuário 2 (ID 2): Menor Púbere (15 anos em 2026 - Nascido em 2011) -> Vinculado ao Usuário 1
 INSERT INTO tb_user (username, display_name, full_name, birth_date, email, cpf, phone, password, newsletter_subscription, terms_accepted, parent_id) VALUES ('enzo15', 'Enzo', 'Enzo da Silva Santos', '2011-05-10', 'enzo@nexus.com.br', '99988877766', '46999998888', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW', FALSE, TRUE, 1);

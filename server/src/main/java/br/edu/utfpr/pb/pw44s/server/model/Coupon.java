@@ -33,7 +33,7 @@ public class Coupon {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "discount_type")
-    private DiscountType type; // FIXED ou PERCENTAGE
+    private DiscountType type;
 
     @NotNull
     @Column(name = "start_date")
@@ -41,22 +41,24 @@ public class Coupon {
 
     @NotNull
     @Column(name = "end_date")
-    private LocalDate endDate; // Substitui o antigo 'validity' para o agendamento
+    private LocalDate endDate;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "target_type")
-    private TargetType targetType; // ALL, CATEGORY, PRODUCT
+    private TargetType targetType;
 
     @Column(name = "target_id")
-    private Long targetId; // ID da categoria ou produto alvo
+    private Long targetId;
 
     @Column(name = "min_purchase_value", precision = 10, scale = 2)
     private BigDecimal minPurchaseValue;
 
+    @Builder.Default
     @Column(name = "active")
     private Boolean active = true;
 
+    @Builder.Default
     @Column(name = "first_purchase_only")
     private Boolean firstPurchaseOnly = false;
 }

@@ -37,6 +37,7 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    @Builder.Default
     @Column(name = "is_adult_only")
     private Boolean adultOnly = false;
 
