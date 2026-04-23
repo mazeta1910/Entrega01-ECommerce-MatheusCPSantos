@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,13 +34,11 @@ public class Order {
     @JsonIgnoreProperties({"password", "authorities"})
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tb_order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;
+    // --- A NOVA RELAÇÃO ---
+    // É esta linha que faz o getItems() existir para o Service!
+    @Builder.Default
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
@@ -50,10 +49,11 @@ public class Order {
         this.orderDate = LocalDateTime.now();
     }
 
+    // A matemática financeira atualizada
     public void calculateTotal() {
-        if (products != null) {
-            this.total = products.stream()
-                    .map(Product::getPrice)
+        if (items != null) {
+            this.total = items.stream()
+                    .map(item -> item.getPriceAtPurchase().multiply(new BigDecimal(item.getQuantity())))
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
         }
     }

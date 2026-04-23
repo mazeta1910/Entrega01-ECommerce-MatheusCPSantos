@@ -1,13 +1,12 @@
 package br.edu.utfpr.pb.pw44s.server.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -17,16 +16,12 @@ import java.util.List;
 public class OrderDTO {
 
     private Long id;
-
+    private BigDecimal total;
+    private LocalDateTime orderDate;
     private UserDTO user;
 
-    @NotEmpty(message = "O pedido deve conter pelo menos um produto.")
-    private List<ProductDTO> products;
+    // A lista antiga de "products" DEVE sair, e a nova entra:
+    private List<OrderItemDTO> items;
 
-    @NotNull(message = "O endereço de entrega é obrigatório.")
     private AddressDTO deliveryAddress;
-
-    private Double total;
-
-    private LocalDate orderDate;
 }
