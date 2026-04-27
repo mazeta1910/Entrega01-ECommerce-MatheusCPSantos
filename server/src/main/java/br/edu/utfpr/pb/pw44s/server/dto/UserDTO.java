@@ -29,6 +29,7 @@ public class UserDTO {
     @Size(min = 5, max = 150, message = "Insira seu nome completo.")
     private String fullName;
 
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY)
     @NotNull(message = "A senha é obrigatória.")
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres.")
     @Pattern(
@@ -37,6 +38,7 @@ public class UserDTO {
     )
     private String password;
 
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY)
     @NotBlank(message = "A confirmação de senha é obrigatória.")
     private String confirmPassword;
 
@@ -67,7 +69,7 @@ public class UserDTO {
     @Pattern(regexp = "^[0-9]{10,11}$",
             message = "O telefone deve conter apenas números, com DDD (10 ou 11 dígitos).")
     private String phone;
-
+    
     private Boolean newsletterSubscription;
 
     private Long parentId;
@@ -76,9 +78,6 @@ public class UserDTO {
     @AssertTrue(message = "Você deve aceitar os termos de uso para prosseguir com o cadastro.")
     private Boolean termsAccepted;
 
-     /**
-     * Validação do ECA Digital (2026):
-     */
     @JsonIgnore
     @AssertTrue(message = "Idade inválida para cadastro ou falta de vínculo parental.")
     public boolean isValidAgePolicy() {
@@ -86,19 +85,12 @@ public class UserDTO {
 
         int age = java.time.Period.between(birthDate, LocalDate.now()).getYears();
 
-        // 1. Bloqueio total abaixo de 12 anos
         if (age < 12) return false;
 
-        // 2. Exigência de supervisor para menores de 16 anos
         if (age < 16 && parentId == null) return false;
 
         return true;
     }
-
-     /*
-     * Método utilitário para verificar se é maior de idade.
-     */
-
     @JsonIgnore
     public boolean isAdult() {
         if (birthDate == null) {

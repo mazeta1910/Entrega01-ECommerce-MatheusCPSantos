@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.pw44s.server.controller;
 
 import br.edu.utfpr.pb.pw44s.server.dto.OrderDTO;
+import br.edu.utfpr.pb.pw44s.server.dto.OrderResponseDTO;
 import br.edu.utfpr.pb.pw44s.server.mapper.OrderMapper;
 import br.edu.utfpr.pb.pw44s.server.model.Order;
 import br.edu.utfpr.pb.pw44s.server.model.User;
@@ -40,24 +41,24 @@ public class OrderController extends CrudController<Order, OrderDTO, Long> {
         return orderMapper.toEntity(dto);
     }
 
-    //Listar pedidos apenas do usuário autenticado
     @GetMapping("me")
-    public ResponseEntity<List<OrderDTO>> findMyOrders() {
-        // Mesma lógica para os pedidos
+    public ResponseEntity<List<OrderResponseDTO>> findMyOrders() {
         String username = org.springframework.security.core.context.SecurityContextHolder
                 .getContext().getAuthentication().getName();
 
         List<Order> orders = orderService.findByUsername(username);
-        return ResponseEntity.ok(orders.stream().map(this::toDto).collect(Collectors.toList()));
+        return ResponseEntity.ok(orders.stream().map(orderMapper::toResponseDto).collect(Collectors.toList()));
     }
 
-    //Finalizar compra (vincular o pedido ao usuário do Token).
     @PostMapping("checkout")
-    public ResponseEntity<OrderDTO> finalizePurchase(@RequestBody OrderDTO orderDto,
-                                                     @AuthenticationPrincipal User user) {
-        Order order = this.toEntity(orderDto); // Converte usando o nosso método
-        order.setUser(user); // Amarra ao usuário logado
+    public ResponseEntity<OrderResponseDTO> finalizePurchase(@RequestBody OrderDTO orderDto,
+                                                             @AuthenticationPrincipal User user) {
+        Order order = orderMapper.toEntity(orderDto);
+        order.setUser(user);
 
-        return ResponseEntity.ok(this.toDto(orderService.save(order)));
+        Order savedOrder = orderService.save(order);
+        Order completeOrder = orderService.findById(savedOrder.getId());
+
+        return ResponseEntity.ok(orderMapper.toResponseDto(completeOrder));
     }
 }

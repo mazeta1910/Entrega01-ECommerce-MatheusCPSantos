@@ -38,14 +38,12 @@ INSERT INTO tb_carrier(name, base_rate, estimated_delivery_days, is_active) VALU
 
 -- ==========================================
 -- 5. POPULANDO MORADAS/ENDEREÇOS (tb_address)
--- Correção aplicada: Alterado 'zipcode' para 'zip_code' para coincidir com a entidade Address.
 -- ==========================================
-INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id) VALUES ('Pato Branco', 'Centro', '123', 'PR', 'Rua Guarani', '85501-000', 1);
-INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id) VALUES ('Pato Branco', 'La Salle', '456', 'PR', 'Rua Tapajós', '85501-100', 2);
-INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id) VALUES ('Curitiba', 'Batel', '10', 'PR', 'Avenida do Batel', '80420-090', 3);
-INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id) VALUES ('Curitiba', 'Água Verde', '55A', 'PR', 'Rua Bento Viana', '80240-110', 3);
-INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id) VALUES ('Curitiba', 'Batel', '10', 'PR', 'Avenida do Batel', '80420-090', 4);
-
+INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id, is_active) VALUES ('Pato Branco', 'Centro', '123', 'PR', 'Rua Guarani', '85501-000', 1, TRUE);
+INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id, is_active) VALUES ('Pato Branco', 'La Salle', '456', 'PR', 'Rua Tapajós', '85501-100', 2, TRUE);
+INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id, is_active) VALUES ('Curitiba', 'Batel', '10', 'PR', 'Avenida do Batel', '80420-090', 3, TRUE);
+INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id, is_active) VALUES ('Curitiba', 'Água Verde', '55A', 'PR', 'Rua Bento Viana', '80240-110', 3, TRUE);
+INSERT INTO tb_address (city, neighborhood, number, state, street, zip_code, user_id, is_active) VALUES ('Curitiba', 'Batel', '10', 'PR', 'Avenida do Batel', '80420-090', 4, TRUE);
 -- ==========================================
 -- 6. POPULANDO ENCOMENDAS E ITENS DA ENCOMENDA
 -- ==========================================

@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    // O Spring Data JPA cria a query SQL automaticamente só de ler este nome!
     List<Address> findByUserIdAndIsActiveTrue(Long userId);
     List<Address> findByUserUsername(String username);
 

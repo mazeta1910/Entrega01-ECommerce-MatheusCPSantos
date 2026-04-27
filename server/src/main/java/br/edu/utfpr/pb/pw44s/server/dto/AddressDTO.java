@@ -39,6 +39,4 @@ public class AddressDTO {
     @Size(min = 2, max = 2, message = "O estado deve ser representado pela sigla (ex: PR).")
     private String state;
 
-    // Deixaremos o User de fora do DTO por enquanto, pois o endereço
-    // será vinculado automaticamente ao utilizador que estiver logado.
 }

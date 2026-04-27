@@ -22,7 +22,6 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
         return orderRepository;
     }
 
-    // CORREÇÃO: Recebe String e chama o método correto do Repositório
     @Override
     public List<Order> findByUsername(String username) {
         return orderRepository.findByUserUsername(username);

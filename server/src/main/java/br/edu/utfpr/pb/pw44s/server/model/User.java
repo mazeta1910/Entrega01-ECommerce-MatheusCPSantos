@@ -59,16 +59,15 @@ public class User implements UserDetails {
     @Column(length = 20)
     private String phone;
 
+    @Column(name = "newsletter_subscription", nullable = false)
     @Builder.Default
-    @Column(name = "newsletter_subscription")
     private Boolean newsletterSubscription = false;
 
     @Column(name = "parent_id")
     private Long parentId;
 
+    @Column(name = "terms_accepted", nullable = false)
     @Builder.Default
-    @NotNull
-    @Column(name = "terms_accepted")
     private Boolean termsAccepted = false;
 
     // DEMAIS CAMPOS //
@@ -108,4 +107,7 @@ public class User implements UserDetails {
         return true;
     }
 
+    public void setNewsletterSubscription(Boolean newsletterSubscription) {
+        this.newsletterSubscription = (newsletterSubscription != null) ? newsletterSubscription : false;
+    }
 }

@@ -42,10 +42,6 @@ public class AddressController extends CrudController<Address, AddressDTO, Long>
         return addressMapper.toEntity(dto);
     }
 
-    /**
-     * Retorna apenas os endereços ativos de um usuário específico.
-     * Essencial para a privacidade dos dados no NEXUS.
-     */
     @GetMapping("me")
     public ResponseEntity<List<AddressDTO>> findMyAddresses() {
         // Forma manual e segura de pegar o username do Token JWT
