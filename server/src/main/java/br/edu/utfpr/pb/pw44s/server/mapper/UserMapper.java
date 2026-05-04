@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
+    @Mapping(target = "confirmPassword", ignore = true)
     UserDTO toDto(User entity);
 
     @Mapping(target = "newsletterSubscription", source = "newsletterSubscription", defaultValue = "false")

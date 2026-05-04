@@ -2,7 +2,7 @@ package br.edu.utfpr.pb.pw44s.server.controller;
 
 import br.edu.utfpr.pb.pw44s.server.dto.UserDTO;
 import br.edu.utfpr.pb.pw44s.server.mapper.UserMapper;
-import br.edu.utfpr.pb.pw44s.server.service.UserService;
+import br.edu.utfpr.pb.pw44s.server.service.IUserService;
 import br.edu.utfpr.pb.pw44s.server.shared.GenericResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("users")
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
     private final UserMapper userMapper;
 
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(IUserService userService, UserMapper userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
     }
