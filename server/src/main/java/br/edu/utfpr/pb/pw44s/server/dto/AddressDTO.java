@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddressDTO {
 
-    @NotNull(message = "O ID do usuário é obrigatório.")
     private Long id;
+
+    private UserDTO user;
 
     @NotNull
     @Pattern(regexp = "^\\d{5}-?\\d{3}$", message = "Formato de CEP inválido. Use XXXXX-XXX ou XXXXXXXX")

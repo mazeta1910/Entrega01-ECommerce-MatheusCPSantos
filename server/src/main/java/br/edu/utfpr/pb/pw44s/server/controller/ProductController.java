@@ -5,6 +5,9 @@ import br.edu.utfpr.pb.pw44s.server.mapper.ProductMapper;
 import br.edu.utfpr.pb.pw44s.server.model.Product;
 import br.edu.utfpr.pb.pw44s.server.service.ICrudService;
 import br.edu.utfpr.pb.pw44s.server.service.IProductService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,4 +38,15 @@ public class ProductController extends CrudController<Product, ProductDTO, Long>
     protected Product toEntity(ProductDTO dto) {
         return productMapper.toEntity(dto);
     }
+
+//    @GetMapping("/categories/{id}")
+//    public ResponseEntity<ProductDTO> findOne(@PathVariable Long id) {
+//        Product entity = getService().findById(id);
+//        if (entity != null) {
+//            return ResponseEntity.ok(convertToDto(entity));
+//        } else {
+//            return ResponseEntity.noContent().build();
+//        }
+//    }
+
 }

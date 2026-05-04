@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IOrderService {
 
     private final OrderRepository orderRepository;
-    private final ProductRepository productRepository; // 1. Injetamos o repositório de Produtos
+    private final ProductRepository productRepository;
 
     public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
@@ -29,6 +29,12 @@ public class OrderServiceImpl extends CrudServiceImpl<Order, Long> implements IO
 
     @Override
     public List<Order> findByUsername(String username) {
+        return orderRepository.findByUserUsername(username);
+    }
+
+    @Override
+    public java.util.List<Order> findAll() {
+        String username = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
         return orderRepository.findByUserUsername(username);
     }
 
