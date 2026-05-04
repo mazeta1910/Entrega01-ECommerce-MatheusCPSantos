@@ -25,8 +25,9 @@ public class UserDTO {
     @Size(min = 4, max = 50)
     private String displayName;
 
-    @NotBlank(message = "O nome completo é obrigatório.")
-    @Size(min = 5, max = 150, message = "Insira seu nome completo.")
+    @NotBlank(message = "O nome completo não pode ser vazio.")
+    @Size(min = 4, max = 100, message = "O nome completo deve ter entre 4 e 100 caracteres.")
+    @Pattern(regexp = "^[A-Za-zÀ-ÿ]+( [A-Za-zÀ-ÿ]+)+$", message = "O nome completo deve conter nome e sobrenome.")
     private String fullName;
 
     @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY)
